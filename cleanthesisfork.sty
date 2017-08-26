@@ -29,7 +29,7 @@
 %
 % **************************************************
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{cleanthesis}[2015/08/26 v0.3.1 A clean LaTeX style for thesis documents]
+\ProvidesPackage{cleanthesisfork}[2015/08/26 v0.3.1 A clean LaTeX style for thesis documents]
 %
 % **************************************************
 % Package options
@@ -98,13 +98,13 @@
 \setkeys[ct]{cthesis}{wrapfooter=false}
 
 \DeclareOptionX*{
-	\PackageWarning{cleanthesis}{Unknown option ‘\CurrentOption’}%
+	\PackageWarning{cleanthesisfork}{Unknown option ‘\CurrentOption’}%
 }
 
 \ProcessOptionsX[ct]<cthesis>
 
 % Checks if bib file exists, if not we throw an error
-\IfFileExists{\cthesis@bibfile.bib}{}{\PackageError{cleanthesis}{Unable to find BibTeX file \cthesis@bibfile.bib!}{Please provide the name of your BibTeX file to the cleanthesis package parameter bibfile.}}
+\IfFileExists{\cthesis@bibfile.bib}{}{\PackageError{cleanthesisfork}{Unable to find BibTeX file \cthesis@bibfile.bib!}{Please provide the name of your BibTeX file to the cleanthesis package parameter bibfile.}}
 
 % **************************************************
 % Color Definitions
@@ -114,7 +114,7 @@
 %
 %
 % The xcolor package enables us to create/handle/name different colors
-\RequirePackage[dvipsnames]{xcolor}
+\RequirePackage[dvipsnames,table]{xcolor}
 
 % updates all colors regarding the defined main and accessory
 % color, as well as the defined colorize mode (full, reduced, bw)
