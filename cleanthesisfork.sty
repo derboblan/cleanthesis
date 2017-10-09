@@ -641,7 +641,8 @@
 % table of contents, list of figures and list of tables
 \RequirePackage{tocloft}
 % - fixes wrong fonts in the toc, thanks to magnucki
-\renewcommand{\cftchapfont}{\usefont{T1}{bch}{b}{n}\selectfont}
+\renewcommand{\cftchapfont}{\sffamily}%\usefont{T1}{bch}{b}{n}\selectfont}
+
 \renewcommand{\cfttoctitlefont}{\thesischapterfont}
 \renewcommand{\cftloftitlefont}{\thesischapterfont}
 \renewcommand{\cftlottitlefont}{\thesischapterfont}
