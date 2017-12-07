@@ -29,7 +29,7 @@
 %
 % **************************************************
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{cleanthesis}[2015/08/26 v0.3.1 A clean LaTeX style for thesis documents]
+\ProvidesPackage{cleanthesisfork}[2015/08/26 v0.3.1 A clean LaTeX style for thesis documents]
 %
 % **************************************************
 % Package options
@@ -88,13 +88,13 @@
 \setkeys[ct]{cthesis}{bibstyle=alphabetic}
 
 \DeclareOptionX*{
-	\PackageWarning{cleanthesis}{Unknown option ‘\CurrentOption’}%
+	\PackageWarning{cleanthesisfork}{Unknown option ‘\CurrentOption’}%
 }
 
 \ProcessOptionsX[ct]<cthesis>
 
 % Checks if bib file exists, if not we throw an error
-\IfFileExists{\cthesis@bibfile.bib}{}{\PackageError{cleanthesis}{Unable to find BibTeX file \cthesis@bibfile.bib!}{Please provide the name of your BibTeX file to the cleanthesis package parameter bibfile.}}
+\IfFileExists{\cthesis@bibfile.bib}{}{\PackageError{cleanthesisfork}{Unable to find BibTeX file \cthesis@bibfile.bib!}{Please provide the name of your BibTeX file to the cleanthesis package parameter bibfile.}}
 
 % **************************************************
 % Color Definitions
@@ -104,7 +104,7 @@
 %
 %
 % The xcolor package enables us to create/handle/name different colors
-\RequirePackage[dvipsnames]{xcolor}
+\RequirePackage[dvipsnames,table]{xcolor}
 
 % updates all colors regarding the defined main and accessory
 % color, as well as the defined colorize mode (full, reduced, bw)
@@ -240,13 +240,31 @@
 % **************************************************
 % Page construction
 % **************************************************
-\KOMAoption{headinclude}{false}     % include header in body?
-\KOMAoption{footinclude}{false}      % include footer in body?
-\KOMAoption{footlines}{2.1}         % number of foot lines
-\KOMAoption{mpinclude}{false}       % include marginpar in body?
-\KOMAoption{BCOR}{25mm}             % binding correction
-\KOMAoption{DIV}{12}                % number of page divs (divider)
+% \KOMAoption{headinclude}{false}     % include header in body?
+% \KOMAoption{footinclude}{false}      % include footer in body?
+% \KOMAoption{footlines}{2.1}         % number of foot lines
+% \KOMAoption{mpinclude}{false}       % include marginpar in body?
+% \KOMAoption{BCOR}{25mm}             % binding correction
+% \KOMAoption{DIV}{12}                % number of page divs (divider)
 %
+
+\RequirePackage[					% page layout modifications
+	paper=a4paper,					% 	- use A4 paper size
+	%scale={0.86,0.94},				% 	- total body size (h,v)
+	%scale={0.86,0.94},				% 	- total body size (h,v)
+	nohead,							% 	- no header
+	includefoot,					% 	- include footer space
+	includemp,						% 	- include side note space
+	bindingoffset=0.5cm,			% 	- binding correction
+	top=3.3cm,						% 	- total body: top margin
+	left=2.3cm,					% 	- total body: left margin (odd pages)
+	right=4.6cm,					% 	- total body: right margin (odd pages)
+	bottom=6.6cm,					% 	- total body: bottom margin
+	marginparwidth=1.75cm,			% 	- width for side note
+	marginparsep=10pt,				% 	- space between notes and body text (content)
+	footskip=2cm,					% 	- footer skip size
+]{geometry}
+
 %
 \RequirePackage[					% advanced quotes
 	strict=true,					% 	- warning are errors now
@@ -620,7 +638,8 @@
 % table of contents, list of figures and list of tables
 \RequirePackage{tocloft}
 % - fixes wrong fonts in the toc, thanks to magnucki
-\renewcommand{\cftchapfont}{\usefont{T1}{bch}{b}{n}\selectfont}
+\renewcommand{\cftchapfont}{\sffamily}%\usefont{T1}{bch}{b}{n}\selectfont}
+
 \renewcommand{\cfttoctitlefont}{\thesischapterfont}
 \renewcommand{\cftloftitlefont}{\thesischapterfont}
 \renewcommand{\cftlottitlefont}{\thesischapterfont}

@@ -1,6 +1,20 @@
 # Clean Thesis
 *-- A Clean LaTeX Style for Thesis Documents --*
 
+## Debian Installation
+
+mkdir /usr/local/share/texmf/tex
+mkdir /usr/local/share/texmf/tex/cleanthesisfork
+
+cd /usr/local/share/texmf/tex/cleanthesisfork/
+ln -s /path/to/cleanthesisfork.sty
+
+mktexlsr /usr/local/share/texmf/tex/cleanthesisfork/
+
+check install with kpsewhich:
+
+kpsewhich cleanthesisfork.sty should output /usr/local/share/texmf/tex/cleanthesisfork/cleanthesisfork.sty
+
 ## Table of contents
 
 * [About](#about)
