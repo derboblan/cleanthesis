@@ -225,7 +225,9 @@
 % **************************************************
 % Font Definitions (see http://www.tug.dk/FontCatalogue/)
 % **************************************************
+\RequirePackage[utf8]{inputenc}
 \RequirePackage[T1]{fontenc}	% font types and character verification
+\RequirePackage{ifxetex}
 
 \ifct@cthesis@sansserif
 	% Using sans-serif fonts
@@ -239,9 +241,21 @@
 \else
 	% Using serif fonts
 	%
-	\RequirePackage{lmodern}	% font set: Latin Modern
-	\RequirePackage{charter}	% font set: Charter
-	%\RequirePackage{fourier}	% font set: (basically improved utopia)
+	\ifxetex
+		% XeLaTeX
+		\RequirePackage{fontspec,xunicode,xltxtra}
+		\RequirePackage{polyglossia}
+		\setsansfont{Gillius ADF}
+		\RequirePackage[]{unicode-math}
+		%    \setmainfont{XITS}
+		%    \setmathfont{XITS Math}
+	\else
+		% default: pdfLaTeX
+		\RequirePackage[babel=true]{microtype}
+		\RequirePackage{lmodern}
+		\RequirePackage{charter}	% font set: Charter
+		%\RequirePackage{fourier}	% font set: (basically improved utopia)
+	\fi
 \fi
 
 % **************************************************
@@ -257,7 +271,7 @@
 \RequirePackage{textcomp}			% different symbols
 \RequirePackage{hyperref} 			% interactive link inside the document
 \RequirePackage[automark]{scrlayer-scrpage}
-
+\RequirePackage{tocbasic}
 %
 \RequirePackage[					% modify figure and table captions
 	font={small}, 					% 	- small font size
@@ -290,7 +304,7 @@
 	%scale={0.86,0.94},				% 	- total body size (h,v)
 	%scale={0.86,0.94},				% 	- total body size (h,v)
 	nohead,							% 	- no header
-	includefoot,					% 	- include footer space
+%	includefoot,					% 	- include footer space
 	includemp,						% 	- include side note space
 	bindingoffset=0.5cm,			% 	- binding correction
 	top=3.3cm,						% 	- total body: top margin
@@ -422,10 +436,11 @@
 
 \automark[section]{chapter}         % automatically marks sections as rightmark
                                     % and chapters as leftmark
-\setlength{\footheight}{120pt}      % avoids scrlayer-scrpage warning:
+\setlength{\headheight}{16.5pt}
+\setlength{\footheight}{2.5cm}      % avoids scrlayer-scrpage warning:
                                     % footheight to low warning
-\setlength{\footskip}{185pt}        % BAD HACK that moves the foot downwards
-\KOMAoption{footwidth}{foot:53pt}   % BAD HACK that moves the foot towards
+\setlength{\footskip}{5.85cm}        % BAD HACK that moves the foot downwards
+\KOMAoption{footwidth}{foot:2.3cm}   % BAD HACK that moves the foot towards
                                     % the outer border
 \setkomafont{pagefoot}{\ctfontfootertext}           % font for footer
 \setkomafont{pagenumber}{\ctfontfooterpagenumber}   % font for page numbers
@@ -452,7 +467,7 @@
         \ctfontfootertext
         \setlength{\lensectionnumber}{0em}
         \settowidth{\lensectionnumber}{\textbf{\thesection}\quad}
-        \protect\begin{minipage}[t]{.72\textwidth}%
+        \protect\begin{minipage}[t]{.60\textwidth}%
             {\ }% bad hack to prevent a wrong baseline for the minipage
             \protect\raggedleft%
             \hangindent=\lensectionnumber%
@@ -465,7 +480,7 @@
 
 %% Vertical line in the footer (between page number and mark)
 \newcommand{\ctfooterline}{%
-    \color{ctcolorfooterline}\rule[-40pt]{1.25pt}{50pt}%
+    \color{ctcolorfooterline}\rule[-2cm]{1.25pt}{2.5cm}%
 }
 
 %% Page number for odd (right) pages
@@ -581,7 +596,7 @@
 
 \newcommand{\thesispartlabelfont}{\color{ctcolorpartnum}\nobreak\book\fontsize{60}{60}\selectfont}
 \newcommand{\thesispartfont}{\color{ctcolorparttext}\nobreak\normalfont\huge \tgherosfont\selectfont}
-\newcommand{\thesischapterfont}{\color{ctcolorblack}\nobreak\normalfont\huge \fontfamily{phv}\selectfont}
+\newcommand{\thesischapterfont}{\color{ctcolorblack}\nobreak\normalfont\huge \tgherosfont\selectfont}
 %\newcommand{\thesissectionfont}{\color{ctcolormain}\nobreak\LARGE\bfseries \tgherosfont}
 \newcommand{\thesissectionfont}{\color{ctcolorsection}\nobreak\normalfont\LARGE \tgherosfont}
 \newcommand{\thesissubsectionfont}{\color{ctcolorsubsection}\nobreak\normalfont\Large \tgherosfont}
@@ -633,7 +648,7 @@
 % ---------------------------
 % > formats: \chapter
 % ---------------------------
-\renewcommand*\chapterheadstartvskip{\vspace*{-8.75em}}
+\renewcommand*\chapterheadstartvskip{\vspace*{-5cm}}
 \renewcommand*\chapterheadendvskip{\vspace*{2.5\baselineskip}}
 \renewcommand*{\chapterformat}{%
     \ctchapternumber{\thechapter}%
@@ -709,7 +724,9 @@
 % table of contents, list of figures and list of tables
 \RequirePackage{tocloft}
 % - fixes wrong fonts in the toc, thanks to magnucki
-\renewcommand{\cftchapfont}{\sffamily}%\usefont{T1}{bch}{b}{n}\selectfont}
+\renewcommand{\cftchapfont}{\tgherosfont}%\usefont{T1}{bch}{b}{n}\selectfont}
+\renewcommand{\cftsecfont}{\tgherosfont}
+\renewcommand{\cftsubsecfont}{\tgherosfont}
 
 \renewcommand{\cfttoctitlefont}{\thesischapterfont}
 \renewcommand{\cftloftitlefont}{\thesischapterfont}
