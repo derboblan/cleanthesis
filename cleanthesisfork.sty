@@ -277,12 +277,12 @@
 % **************************************************
 % Page construction
 % **************************************************
-% \KOMAoption{headinclude}{false}     % include header in body?
-% \KOMAoption{footinclude}{false}      % include footer in body?
-% \KOMAoption{footlines}{2.1}         % number of foot lines
-% \KOMAoption{mpinclude}{false}       % include marginpar in body?
-% \KOMAoption{BCOR}{25mm}             % binding correction
-% \KOMAoption{DIV}{12}                % number of page divs (divider)
+ \KOMAoption{headinclude}{false}     % include header in body?
+ \KOMAoption{footinclude}{false}      % include footer in body?
+ \KOMAoption{footlines}{2.1}         % number of foot lines
+ \KOMAoption{mpinclude}{false}       % include marginpar in body?
+ \KOMAoption{BCOR}{25mm}             % binding correction
+ \KOMAoption{DIV}{12}                % number of page divs (divider)
 %
 
 \RequirePackage[					% page layout modifications
@@ -438,7 +438,8 @@
         % 'Chapter A Appendix ...', thanks to @farbverlust (issue #47)
         {\color{ctcolorfootermark}\textbf{\@chapapp\ \thechapter}}%
         \quad%
-        \protect\begin{minipage}[t]{.65\textwidth}%
+%        #1%
+        \protect\begin{minipage}[t]{.60\textwidth}%
             #1%
         \protect\end{minipage}%
     }{}%
@@ -464,7 +465,7 @@
 
 %% Vertical line in the footer (between page number and mark)
 \newcommand{\ctfooterline}{%
-    \color{ctcolorfooterline}\rule[-90pt]{1.25pt}{100pt}%
+    \color{ctcolorfooterline}\rule[-40pt]{1.25pt}{50pt}%
 }
 
 %% Page number for odd (right) pages
