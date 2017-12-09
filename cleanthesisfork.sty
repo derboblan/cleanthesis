@@ -83,8 +83,8 @@
 \setkeys[ct]{cthesis}{colorize=full}
 
 % OPTION colortheme
-% --> values = bluemagenta|bluegreen
-\define@choicekey*[ct]{cthesis}{colortheme}[\val\themenr]{bluemagenta,bluegreen}[bluemagenta]{\def\cthesis@colortheme{\themenr}}
+% --> values = bluemagenta|bluegreen|purple
+\define@choicekey*[ct]{cthesis}{colortheme}[\val\themenr]{bluemagenta,bluegreen,purple}[bluemagenta]{\def\cthesis@colortheme{\themenr}}
 \setkeys[ct]{cthesis}{colortheme=bluemagenta}
 
 % OPTION bibsys
@@ -146,7 +146,7 @@
 	\colorlet{ctcolorpartline}{ctcolorblack}
 	\colorlet{ctcolorparttext}{ctcolorblack}
 	\colorlet{ctcolorchapternum}{ctcolormain}
-	\colorlet{ctcolorchapterline}{ctcolormain}
+	\colorlet{ctcolorchapterline}{ctcolorblack}
 	\colorlet{ctcolorsection}{ctcolormain}
 	\colorlet{ctcolorsubsection}{ctcolormain}
 	\colorlet{ctcolorparagraph}{ctcolorblack}
@@ -203,6 +203,11 @@
 	\cthesissetcolor{cmyk}{.61, .47, .03, 0}{.48, .05, .91, 0}%
 }
 
+% sets the purple color theme ()
+\def\cthesissetcolorpurple{%
+	\cthesissetcolor{cmyk}{.25, .75, 0, 0}{.1, .6, 0, 0}%
+}
+
 % defines general colors
 \definecolor{ctcolorblack}{gray}{0}
 \definecolor{ctcolorgray}{gray}{.5}
@@ -216,6 +221,9 @@
 \or
 	% case 1 (colortheme == bluegreen)
 	\cthesissetcolorbluegreen
+\or
+	% case 2 (colortheme == purple)
+	\cthesissetcolorpurple
 \else
 	% all other cases
 	\cthesissetcolorbluemagenta
@@ -251,7 +259,6 @@
 		%    \setmathfont{XITS Math}
 	\else
 		% default: pdfLaTeX
-		\RequirePackage[babel=true]{microtype}
 		\RequirePackage{lmodern}
 		\RequirePackage{charter}	% font set: Charter
 		%\RequirePackage{fourier}	% font set: (basically improved utopia)
@@ -261,7 +268,7 @@
 % **************************************************
 % Load Packages
 % **************************************************
-\RequirePackage{microtype}			% typographic tuning
+\RequirePackage[babel=true]{microtype}			% typographic tuning
 \RequirePackage{setspace}			% for line spacing, e.g. \onehalfspacing
 \RequirePackage[]{graphicx}			% graphics import features
 \RequirePackage{tabularx}			% table features
@@ -305,14 +312,14 @@
 	%scale={0.86,0.94},				% 	- total body size (h,v)
 	nohead,							% 	- no header
 %	includefoot,					% 	- include footer space
-	includemp,						% 	- include side note space
-	bindingoffset=0.5cm,			% 	- binding correction
+%	includemp,						% 	- include side note space
+	bindingoffset=0.25cm,			% 	- binding correction
 	top=3.3cm,						% 	- total body: top margin
 	left=2.3cm,					% 	- total body: left margin (odd pages)
 	right=4.6cm,					% 	- total body: right margin (odd pages)
 	bottom=6.6cm,					% 	- total body: bottom margin
-	marginparwidth=1.75cm,			% 	- width for side note
-	marginparsep=10pt,				% 	- space between notes and body text (content)
+%	marginparwidth=1.75cm,			% 	- width for side note
+%	marginparsep=10pt,				% 	- space between notes and body text (content)
 	footskip=2cm,					% 	- footer skip size
 ]{geometry}
 
@@ -676,7 +683,7 @@
     \begin{minipage}[t]{0.7\textwidth}%
         \vspace*{5.85em}%
         \raggedright%
-        #1%
+        \color{ctcolorchapternum}{\textsc{#1}}%
     \end{minipage}%
 }
 %
