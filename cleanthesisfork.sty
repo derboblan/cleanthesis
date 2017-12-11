@@ -112,6 +112,11 @@
 \define@key[ct]{cthesis}{quotesstyle}[english]{\def\cthesis@quotesstyle{#1}}
 \setkeys[ct]{cthesis}{quotesstyle=english}
 
+% OPTION language
+% --> values = german|english
+\define@choicekey*[ct]{cthesis}{language}{german,english}[german]{\def\cthesis@language{#1}}
+\setkeys[ct]{cthesis}{language=german}
+
 \DeclareOptionX*{
 	\PackageWarning{cleanthesisfork}{Unknown option ‘\CurrentOption’}%
 }
@@ -268,6 +273,7 @@
 % **************************************************
 % Load Packages
 % **************************************************
+\RequirePackage[\cthesis@language]{babel}
 \RequirePackage[babel=true]{microtype}			% typographic tuning
 \RequirePackage{setspace}			% for line spacing, e.g. \onehalfspacing
 \RequirePackage[]{graphicx}			% graphics import features
