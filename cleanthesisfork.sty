@@ -62,6 +62,11 @@
 \define@boolkey[ct]{cthesis}{sansserif}[false]{}
 \setkeys[ct]{cthesis}{sansserif=false}
 
+% OPTION configurealgorithms
+% --> values = true|false
+\define@boolkey[ct]{cthesis}{configurealgorithms}[false]{}
+\setkeys[ct]{cthesis}{configurealgorithms=false}
+
 % OPTION configurelistings
 % --> values = true|false
 \define@boolkey[ct]{cthesis}{configurelistings}[false]{}
@@ -335,7 +340,16 @@
 	style=\cthesis@quotesstyle		% 	- german quotes
 ]{csquotes}
 %
-
+%
+% **************************************************
+% Algorithms
+% **************************************************
+\ifct@cthesis@configurealgorithms
+        \RequirePackage{algpseudocode}			% package algorithmicx for pseudo code
+        \RequirePackage{algorithm}			% float environement for algorithms
+\fi
+%
+%
 % **************************************************
 % Bibliography
 % **************************************************
@@ -725,7 +739,7 @@
 %
 %
 % **************************************************
-% ToC, LoF, LoT, LoL
+% ToC, LoF, LoT, LoL, LoA
 % **************************************************
 %
 % -- modifications regarding the table of contents,
@@ -742,8 +756,8 @@
 \renewcommand{\cftsubsecfont}{\tgherosfont}
 
 \renewcommand{\cfttoctitlefont}{\thesischapterfont}
-\renewcommand{\cftloftitlefont}{\thesischapterfont}
-\renewcommand{\cftlottitlefont}{\thesischapterfont}
+\renewcommand{\cftloftitlefont}{\thesissectionfont}
+\renewcommand{\cftlottitlefont}{\thesissectionfont}
 %
 %
 % > adjusts the indention for figure and table entries (lof and lot)
@@ -751,6 +765,23 @@
 %      the length indent and its numwidth to the length numwidth
 \cftsetindents{figure}{0em}{3em}
 \cftsetindents{table}{0em}{3em}
+%
+%
+\ifct@cthesis@configurealgorithms
+%	% makes loa to look like lof
+	\makeatletter
+	\begingroup\let\newcounter\@gobble\let\setcounter\@gobbletwo
+		\globaldefs\@ne \let\c@loadepth\@ne
+                \newlistof{algos}{loa}{\listalgorithmname}
+        \endgroup
+        \let\l@algorithm\l@figure
+	\AtBeginDocument{\addtocontents{loa}{\protect\addvspace{10\p@}}}
+        %\makeatother
+        \renewcommand{\listofalgorithms}{\listofalgos}
+        \renewcommand{\cftloatitlefont}{\thesissectionfont}
+        \cftsetindents{algos}{0em}{3em}
+\fi
+%
 %
 %
 \ifct@cthesis@configurelistings
